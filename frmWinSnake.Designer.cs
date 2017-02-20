@@ -28,21 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSnake));
+            this.pnlCanvas = new System.Windows.Forms.Panel();
+            this.Move = new System.Windows.Forms.Timer(this.components);
+            this.Draw = new System.Windows.Forms.Timer(this.components);
+            this.Second = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // pnlCanvas
+            // 
+            resources.ApplyResources(this.pnlCanvas, "pnlCanvas");
+            this.pnlCanvas.Name = "pnlCanvas";
+            // 
+            // Move
+            // 
+            this.Move.Enabled = true;
+            this.Move.Interval = 2500;
+            this.Move.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // Draw
+            // 
+            this.Draw.Enabled = true;
+            this.Draw.Interval = 1;
+            this.Draw.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // Second
+            // 
+            this.Second.Enabled = true;
+            this.Second.Interval = 1000;
+            this.Second.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // frmSnake
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 244);
+            this.Controls.Add(this.pnlCanvas);
             this.Name = "frmSnake";
-            this.Text = "Snake";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSnake_KeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel pnlCanvas;
+        private System.Windows.Forms.Timer Move;
+        private System.Windows.Forms.Timer Draw;
+        private System.Windows.Forms.Timer Second;
     }
 }
 
