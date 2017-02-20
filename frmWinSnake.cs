@@ -12,7 +12,8 @@ namespace WinSnake
 {
     public partial class frmSnake : Form
     {
-        Schlange S;
+        List<Schlange> listSnakes = new List<Schlange>();
+        
         Graphics canvas;
         int Grid = 25;
         int frame = 0;
@@ -26,13 +27,17 @@ namespace WinSnake
         private void Form1_Load(object sender, EventArgs e)
         {
             canvas = pnlCanvas.CreateGraphics();
-            S = new Schlange(canvas,Grid);
+            listSnakes.Add(new Schlange(canvas, Grid));
         }
 
         public void show()
         {
             canvas.FillRectangle(Brushes.Black, 0, 0, pnlCanvas.Width, pnlCanvas.Height);
-            S.show();
+            foreach(Schlange Snake in listSnakes)
+            {
+
+                Snake.show();
+            }
         }
 
 
@@ -41,44 +46,45 @@ namespace WinSnake
         {
            if (e.KeyCode == Keys.Up)
             {
-                S.richtung(0, -1);
+                listSnakes[0].richtung(0, -1);
             }
             if (e.KeyCode == Keys.Down)
             {
-                S.richtung(0, 1);
+                listSnakes[0].richtung(0, 1);
             }
             if (e.KeyCode == Keys.Left)
             {
-                S.richtung(-1, 0);
+                listSnakes[0].richtung(-1, 0);
             }
             if (e.KeyCode == Keys.Right)
             {
-                S.richtung(1, 0);
+                listSnakes[0].richtung(1, 0);
             }
 
             if (e.KeyCode == Keys.P)
             {
-                S.eat();
+                listSnakes[0].eat();
             }
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            S.eat();
-        }
+       
+        
 
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            S.update();
+            foreach(Schlange Snake in listSnakes)
+            {
+                Snake.update();
+            }
         }
         
         private void timer2_Tick(object sender, EventArgs e)
         {
             show();
             frame++;
-            this.Text = "FPS: " + (Convert.ToString(FPS)) + " Teile: " + Convert.ToString(S.Tail.Count);
+            this.Text = "FPS: " + (Convert.ToString(FPS)) + " Teile: " + Convert.ToString(listSnakes[0].Tail.Count);
         }
 
         private void timer3_Tick(object sender, EventArgs e)

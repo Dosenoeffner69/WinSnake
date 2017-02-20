@@ -13,7 +13,6 @@ namespace WinSnake
         int SpeedY;
         Graphics canvas;
         int Grid;
-
         public List<Piece> Tail = new List<Piece>();
 
 

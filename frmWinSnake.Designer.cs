@@ -44,7 +44,7 @@
             // Move
             // 
             this.Move.Enabled = true;
-            this.Move.Interval = 150;
+            this.Move.Interval = 2500;
             this.Move.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Draw
