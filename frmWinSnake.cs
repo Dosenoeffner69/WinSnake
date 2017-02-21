@@ -76,8 +76,16 @@ namespace WinSnake
         {
             foreach(Schlange Snake in listSnakes)
             {
-                Snake.update();
+                if (Snake.Bordercrash == false) Snake.update();
+
+                else
+                {
+                    Move.Enabled = false;
+                    MessageBox.Show("Test");
+                }
             }
+          
+
         }
         
         private void timer2_Tick(object sender, EventArgs e)
@@ -91,6 +99,11 @@ namespace WinSnake
         {
             FPS = frame;
             frame = 0;
+        }
+
+        private void pnlCanvas_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

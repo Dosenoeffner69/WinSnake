@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Windows.Forms;
 
 namespace WinSnake
 {
     class Schlange
     {
+
         int SpeedX;
         int SpeedY;
         Graphics canvas;
         int Grid;
         public List<Piece> Tail = new List<Piece>();
-
+        public bool Bordercrash = false;
 
         public Schlange(Graphics c,int Grid)
         {
@@ -70,10 +74,11 @@ namespace WinSnake
                     return value;
                 }
 
-                return 0;
+                Bordercrash = true;
+                return 0;               
             }
-
-            return Convert.ToInt32(canvas.VisibleClipBounds.Height);
+            Bordercrash = true;
+            return Convert.ToInt32(canvas.VisibleClipBounds.Height - Grid);
         }
         
 

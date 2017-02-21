@@ -40,11 +40,12 @@
             // 
             resources.ApplyResources(this.pnlCanvas, "pnlCanvas");
             this.pnlCanvas.Name = "pnlCanvas";
+            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // Move
             // 
             this.Move.Enabled = true;
-            this.Move.Interval = 2500;
+            this.Move.Interval = 250;
             this.Move.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Draw
