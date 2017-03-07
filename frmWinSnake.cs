@@ -13,7 +13,7 @@ namespace WinSnake
     public partial class frmSnake : Form
     {
         List<Schlange> listSnakes = new List<Schlange>();
-        
+        Piece Essen; 
         Graphics canvas;
         int Grid = 25;
         int frame = 0;
@@ -27,7 +27,8 @@ namespace WinSnake
         private void Form1_Load(object sender, EventArgs e)
         {
             canvas = pnlCanvas.CreateGraphics();
-            listSnakes.Add(new Schlange(canvas, Grid));
+            listSnakes.Add(new Schlange(canvas, Grid)); //Erstellt oben links das erste Snakepiece
+            Punktgenerieren();
         }
 
         public void show()
@@ -37,10 +38,10 @@ namespace WinSnake
             {
 
                 Snake.show();
+
             }
+            Essen.show();
         }
-
-
 
         private void frmSnake_KeyDown(object sender, KeyEventArgs e)
         {
@@ -78,11 +79,11 @@ namespace WinSnake
             {
                 if (Snake.Bordercrash == false) Snake.update();
 
-                else
+                /*else
                 {
                     Move.Enabled = false;
-                    MessageBox.Show("Test");
-                }
+                    MessageBox.Show("Test");        Grenzenüberschreitung - Funktoniert noch nicht richtig
+                }*/
             }
           
 
@@ -102,6 +103,21 @@ namespace WinSnake
         }
 
         private void pnlCanvas_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public void Punktgenerieren()
+        {
+            Random tmp = new Random();
+            Random rnd = new Random();
+            Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255))); //Zufälige Farbe
+
+            //Tail.Add(new Piece(b, canvas, Tail[Tail.Count - 1].PosX, Tail[Tail.Count - 1].PosY, Grid, false));
+            Essen = new Piece(b, canvas, 25*tmp.Next(0, pnlCanvas.Width / 25-1),25*tmp.Next(0,pnlCanvas.Height /25-1),25,true);
+        }
+
+        private void Check()
         {
 
         }

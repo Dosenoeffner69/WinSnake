@@ -29,5 +29,9 @@ namespace WinSnake
         {
             canvas.FillRectangle(color, PosX, PosY, grid, grid);
         }
+        public void showessen()
+        {
+            canvas.FillEllipse(color, PosX, PosY, grid, grid);
+        }
     }
 }

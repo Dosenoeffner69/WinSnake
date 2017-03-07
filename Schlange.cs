@@ -15,9 +15,9 @@ namespace WinSnake
 
         int SpeedX;
         int SpeedY;
-        Graphics canvas;
-        int Grid;
-        public List<Piece> Tail = new List<Piece>();
+        Graphics canvas; //panelbox-zeichenfläche
+        int Grid; //Größe
+        public List<Piece> Tail = new List<Piece>(); //Snake-pieces
         public bool Bordercrash = false;
 
         public Schlange(Graphics c,int Grid)
@@ -25,31 +25,29 @@ namespace WinSnake
             SpeedX = 0;
             SpeedY = 0;
             canvas = c;
-            this.Grid = Grid;
-            Tail.Add(new Piece(Brushes.White, canvas, 0, 0, Grid,true));
+            this.Grid = Grid; //this. = Das Grid aus der Klasse
+            Tail.Add(new Piece(Brushes.White, canvas, 0, 0, Grid,true)); //Erstes Rechteck anzeigen
         }
 
         public void update()
         {
             for(int x = Tail.Count - 1; x > 0; x--)
             {
-                Tail[x].PosX = Tail[x - 1].PosX;
+                Tail[x].PosX = Tail[x - 1].PosX; //Wertübergabe der Position X und Y
                 Tail[x].PosY = Tail[x - 1].PosY;
                 Tail[x].aktiv = true;
             }
     
-            Tail[0].PosX= LimitToRange(Tail[0].PosX += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid);
+            Tail[0].PosX= LimitToRange(Tail[0].PosX += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid); //Grenzüberschreitung
             Tail[0].PosY= LimitToRange(Tail[0].PosY += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
         }
 
-        public void eat()
+        public void eat() 
         {
             Random rnd = new Random();
-            Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255)));
-            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].PosX, Tail[Tail.Count-1].PosY, Grid,false));
+            Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255))); //Zufälige Farbe
+            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].PosX, Tail[Tail.Count-1].PosY, Grid,false)); 
         }
-
-
 
         public void richtung(int X, int Y)
         {
