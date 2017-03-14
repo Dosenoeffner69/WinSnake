@@ -40,7 +40,6 @@
             // 
             resources.ApplyResources(this.pnlCanvas, "pnlCanvas");
             this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // Move
             // 

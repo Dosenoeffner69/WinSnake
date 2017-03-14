@@ -42,11 +42,18 @@ namespace WinSnake
             Tail[0].PosY= LimitToRange(Tail[0].PosY += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
         }
 
-        public void eat() 
+        public bool eat(int PositionX, int PositionY) 
         {
-            Random rnd = new Random();
-            Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255))); //Zufälige Farbe
-            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].PosX, Tail[Tail.Count-1].PosY, Grid,false)); 
+
+            if(Tail[0].PosX == PositionX && Tail[0].PosY == PositionY)
+            {
+                Random rnd = new Random();
+                Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255))); //Zufälige Farbe
+                Tail.Add(new Piece(b, canvas, Tail[Tail.Count - 1].PosX, Tail[Tail.Count - 1].PosY, Grid, false));
+
+                return true;
+            }
+            return false;
         }
 
         public void richtung(int X, int Y)
