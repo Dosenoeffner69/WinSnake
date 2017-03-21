@@ -15,56 +15,53 @@ namespace WinSnake
         Graphics canvas;
         int Grid;
         public List<Piece> Tail;
-        public bool selfeaten;
+        public bool eaten;
+        public bool wall;
+        public bool otherSnake;
+        Point Startpunkt;
 
-
-
-        public Schlange(Graphics c,int Grid)
-        {
-            
-            SpeedX = 1;
-            SpeedY = 0;
+        public Schlange(Graphics c,int Grid,int X, int Y,int moveX, int moveY)
+        { 
+            SpeedX = moveX;
+            SpeedY = moveY;
             canvas = c;
             this.Grid = Grid;
             Tail = new List<Piece>();
-            Tail.Add(new Piece(Brushes.White, canvas, 0, 0, Grid, true));
-            selfeaten = false;
-
-
+            Tail.Add(new Piece(Brushes.White, canvas,X,Y, Grid));
+            Console.WriteLine(Startpunkt);
         }
 
         public void update()
         {
-            for(int x = Tail.Count - 1; x > 0; x--)
+            for (int x = Tail.Count - 1; x > 0; x--)
             {
-                Tail[x].PosX = Tail[x - 1].PosX;
-                Tail[x].PosY = Tail[x - 1].PosY;
-                Tail[x].aktiv = true;
+                Tail[x].Pos = Tail[x - 1].Pos;
+               
             }
-            //Tail.Add(new Piece(Brushes.White, canvas, 0, 0, Grid, true));
-            Tail[0].PosX= LimitToRange(Tail[0].PosX += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid);
-            Tail[0].PosY= LimitToRange(Tail[0].PosY += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
-            //check();
+            Tail[0].Pos.X = LimitToRange(Tail[0].Pos.X += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid);
+            Tail[0].Pos.Y = LimitToRange(Tail[0].Pos.Y += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
+            //Console.WriteLine("{0},{1}",Tail[0].PosX, Tail[0].PosY);
         }
 
         public void eat()
         {
             Random rnd = new Random();
             Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255)));
-            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].PosX, Tail[Tail.Count-1].PosY, Grid,false));
+            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].Pos.X, Tail[Tail.Count-1].Pos.Y, Grid));
         }
 
-        public bool check()
+        public void check()
         {
-            for(int x = Tail.Count - 1; x > 0; x--)
+            for(int x = Tail.Count - 1; x > 1; x--)
             {
-                if (Tail[x].PosX == Tail[0].PosX && Tail[x].PosY == Tail[0].PosY)
+                if (Tail[x].Pos.X == Tail[0].Pos.X && Tail[x].Pos.Y == Tail[0].Pos.Y)
                 {
-                    return true;
+                    eaten=true; 
                 }            
             }
-            return false;
         }
+
+
 
         public void richtung(int X, int Y)
         {
@@ -76,11 +73,11 @@ namespace WinSnake
         {
            foreach(Piece p in Tail)
             {
-                if(p.aktiv) p.show();
+                p.show();
             }
         }
 
-        public int LimitToRange(int value, int inclusiveMinimum, int inlusiveMaximum)
+        int LimitToRange(int value, int inclusiveMinimum, int inlusiveMaximum)
         {
             if (value >= inclusiveMinimum)
             {
@@ -88,9 +85,10 @@ namespace WinSnake
                 {
                     return value;
                 }
+                wall = true;
                 return 0;
             }
-
+            wall = true;
             return Convert.ToInt32(canvas.VisibleClipBounds.Height-Grid);
         }
     }

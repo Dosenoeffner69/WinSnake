@@ -10,24 +10,26 @@ namespace WinSnake
 {
     class Piece
     {
-        public int PosX, PosY,grid;
+        public Point Pos;
+        public int grid;
         Brush color;
         Graphics canvas;
-        public bool aktiv;
+        
+     
 
-        public Piece(Brush color,Graphics canvas,int x,int y,int grid,bool aktiv)
+        public Piece(Brush color,Graphics canvas,int x,int y,int grid)
         {
             this.color = color;
             this.canvas = canvas;
             this.grid = grid;
-            this.PosX = x;
-            this.PosY = y;
-            this.aktiv = aktiv; 
+            this.Pos.X = x;
+            this.Pos.Y = y;
+           
         }
         
         public void show()
         {
-            canvas.FillRectangle(color, PosX, PosY, grid, grid);
+            canvas.FillRectangle(color, Pos.X, Pos.Y, grid, grid);
         }
     }
 }
