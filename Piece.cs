@@ -15,8 +15,6 @@ namespace WinSnake
         Brush color;
         Graphics canvas;
         
-     
-
         public Piece(Brush color,Graphics canvas,int x,int y,int grid)
         {
             this.color = color;
@@ -24,12 +22,12 @@ namespace WinSnake
             this.grid = grid;
             this.Pos.X = x;
             this.Pos.Y = y;
-           
         }
         
         public void show()
         {
             canvas.FillRectangle(color, Pos.X, Pos.Y, grid, grid);
+            canvas.DrawRectangle(Pens.Black, Pos.X, Pos.Y, grid, grid);
         }
     }
 }

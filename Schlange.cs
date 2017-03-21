@@ -19,16 +19,25 @@ namespace WinSnake
         public bool wall;
         public bool otherSnake;
         Point Startpunkt;
+        public int Richtung;
+        Brush color;
 
-        public Schlange(Graphics c,int Grid,int X, int Y,int moveX, int moveY)
-        { 
-            SpeedX = moveX;
-            SpeedY = moveY;
+        public Schlange(Graphics c,int Grid,int X, int Y,int Richtung,Brush color)
+        {
+            this.color = color;
+            this.Richtung = Richtung;
             canvas = c;
             this.Grid = Grid;
             Tail = new List<Piece>();
-            Tail.Add(new Piece(Brushes.White, canvas,X,Y, Grid));
+            Tail.Add(new Piece(color, canvas,X,Y, Grid));
             Console.WriteLine(Startpunkt);
+            switch (Richtung)
+            {
+                case 1: SpeedX = 0;SpeedY = -1;break;
+                case 2: SpeedX = 1;SpeedY = 0;break;
+                case 3:SpeedX = 0;SpeedY = 1;break;
+                case 4:SpeedX = -1;SpeedY = 0;break;
+            }
         }
 
         public void update()
@@ -36,18 +45,14 @@ namespace WinSnake
             for (int x = Tail.Count - 1; x > 0; x--)
             {
                 Tail[x].Pos = Tail[x - 1].Pos;
-               
             }
             Tail[0].Pos.X = LimitToRange(Tail[0].Pos.X += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid);
             Tail[0].Pos.Y = LimitToRange(Tail[0].Pos.Y += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
-            //Console.WriteLine("{0},{1}",Tail[0].PosX, Tail[0].PosY);
         }
 
         public void eat()
         {
-            Random rnd = new Random();
-            Brush b = new SolidBrush(Color.FromArgb(255, rnd.Next(255), rnd.Next(255), rnd.Next(255)));
-            Tail.Add(new Piece(b, canvas, Tail[Tail.Count-1].Pos.X, Tail[Tail.Count-1].Pos.Y, Grid));
+            Tail.Add(new Piece(color, canvas, Tail[Tail.Count-1].Pos.X, Tail[Tail.Count-1].Pos.Y, Grid));
         }
 
         public void check()
@@ -61,12 +66,16 @@ namespace WinSnake
             }
         }
 
-
-
-        public void richtung(int X, int Y)
+        public void richtung(int richtung)
         {
-            SpeedX = X;
-            SpeedY = Y;
+            this.Richtung = richtung;
+            switch (Richtung)
+            {
+                case 1: SpeedX = 0; SpeedY = -1; break;
+                case 2: SpeedX = 1; SpeedY = 0; break;
+                case 3: SpeedX = 0; SpeedY = 1; break;
+                case 4: SpeedX = -1; SpeedY = 0; break;
+            }
         }
 
         public void show()

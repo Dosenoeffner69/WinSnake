@@ -20,27 +20,13 @@ namespace WinSnake
         public frmSnake()
         {
             InitializeComponent();
-            int X = pnlCanvas.Width;
-            int Y = pnlCanvas.Height;
-
-            int Xoff = pnlCanvas.Width % Grid;
-            int Yoff = pnlCanvas.Height % Grid;
-
-            pnlCanvas.Height = (X-Xoff);
-            pnlCanvas.Width =(Y-Yoff);
-            pnlCanvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            
-            Console.WriteLine("Zeichenfläche(Breite:{0},Höhe:{1})",pnlCanvas.Width,pnlCanvas.Height);
-
+            pbCanvas.Height = 302;
+            pbCanvas.Width = 302;
+            pbCanvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            canvas = pnlCanvas.CreateGraphics();
-            // Console.WriteLine(canvas.VisibleClipBounds);
-            Game = new Game(canvas, Grid);
-            Tick.Start();
+        {   
         }
 
         private void frmSnake_KeyDown(object sender, KeyEventArgs e)
@@ -51,10 +37,19 @@ namespace WinSnake
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            //canvas = pnlCanvas.CreateGraphics();
-            //// Console.WriteLine(canvas.VisibleClipBounds);
-            //Game = new Game(canvas, Grid);
-            //Tick.Start();
+            btnStart.Enabled = false;
+            rbtnEinSpieler.Enabled = false;
+            rbtnZweiSpieler.Enabled = false;
+
+
+            Console.WriteLine("Zeichenfläche(Breite:{0},Höhe:{1})", pbCanvas.Width, pbCanvas.Height);
+            canvas = pbCanvas.CreateGraphics();
+            if (rbtnEinSpieler.Checked == true) Game = new Game(canvas, Grid,1);
+            else Game = new Game(canvas, Grid, 2);
+
+
+            
+            Tick.Start();
         }
 
         private void Tick_Tick(object sender, EventArgs e)
