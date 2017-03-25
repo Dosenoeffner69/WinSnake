@@ -21,6 +21,7 @@ namespace WinSnake
         Point Startpunkt;
         public int Richtung;
         Brush color;
+        public bool moved=false;
 
         public Schlange(Graphics c,int Grid,int X, int Y,int Richtung,Brush color)
         {
@@ -48,6 +49,7 @@ namespace WinSnake
             }
             Tail[0].Pos.X = LimitToRange(Tail[0].Pos.X += SpeedX * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Width) - Grid);
             Tail[0].Pos.Y = LimitToRange(Tail[0].Pos.Y += SpeedY * Grid, 0, Convert.ToInt32(canvas.VisibleClipBounds.Height) - Grid);
+            this.moved = false;
         }
 
         public void eat()
@@ -68,6 +70,7 @@ namespace WinSnake
 
         public void richtung(int richtung)
         {
+            this.moved = true;
             this.Richtung = richtung;
             switch (Richtung)
             {

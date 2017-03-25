@@ -48,6 +48,7 @@
             // 
             // Tick
             // 
+            this.Tick.Interval = 250;
             this.Tick.Tick += new System.EventHandler(this.Tick_Tick);
             // 
             // rbtnEinSpieler
@@ -74,10 +75,10 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pbCanvas);
             this.Controls.Add(this.rbtnZweiSpieler);
             this.Controls.Add(this.rbtnEinSpieler);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.pbCanvas);
             this.KeyPreview = true;
             this.Name = "frmSnake";
             this.Load += new System.EventHandler(this.Form1_Load);

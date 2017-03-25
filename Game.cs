@@ -32,17 +32,17 @@ namespace WinSnake
 
         public void Controls(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down && Spieler[0].Richtung!=1) Spieler[0].richtung(3);
-            if (e.KeyCode == Keys.Up&&Spieler[0].Richtung!=3) Spieler[0].richtung(1);
-            if (e.KeyCode == Keys.Left && Spieler[0].Richtung != 2) Spieler[0].richtung(4);
-            if (e.KeyCode == Keys.Right && Spieler[0].Richtung != 4) Spieler[0].richtung(2);
+            if (e.KeyCode == Keys.Down && Spieler[0].Richtung != 1 && Spieler[0].Richtung != 3 && Spieler[0].moved == false) Spieler[0].richtung(3);
+            if (e.KeyCode == Keys.Up   &&Spieler[0].Richtung!=3 && Spieler[0].Richtung != 1 && Spieler[0].moved == false) Spieler[0].richtung(1);
+            if (e.KeyCode == Keys.Left && Spieler[0].Richtung != 2 && Spieler[0].Richtung != 4 && Spieler[0].moved == false) Spieler[0].richtung(4);
+            if (e.KeyCode == Keys.Right && Spieler[0].Richtung != 4 && Spieler[0].Richtung != 2 && Spieler[0].moved == false) Spieler[0].richtung(2);
 
             if (anzahlSpieler == 2)
             {
-                if (e.KeyCode == Keys.S && Spieler[0].Richtung != 1) Spieler[1].richtung(3);
-                if (e.KeyCode == Keys.W && Spieler[0].Richtung != 3) Spieler[1].richtung(1);
-                if (e.KeyCode == Keys.A && Spieler[0].Richtung != 2) Spieler[1].richtung(4);
-                if (e.KeyCode == Keys.D && Spieler[0].Richtung != 4) Spieler[1].richtung(2);
+                if (e.KeyCode == Keys.S && Spieler[0].Richtung != 1 && Spieler[0].Richtung != 3 && Spieler[1].moved == false) Spieler[1].richtung(3);
+                if (e.KeyCode == Keys.W && Spieler[0].Richtung != 3 && Spieler[0].Richtung != 1 && Spieler[1].moved == false) Spieler[1].richtung(1);
+                if (e.KeyCode == Keys.A && Spieler[0].Richtung != 2 && Spieler[0].Richtung != 4 && Spieler[1].moved == false) Spieler[1].richtung(4);
+                if (e.KeyCode == Keys.D && Spieler[0].Richtung != 4 && Spieler[0].Richtung != 2 && Spieler[1].moved == false) Spieler[1].richtung(2);
             }
         }
 
@@ -83,18 +83,46 @@ namespace WinSnake
                 //prüfe auf kollison mit anderer Schlange
                 foreach (Schlange S2 in Spieler)
                 {
-                    foreach (Piece p1 in S.Tail)
+                    foreach (Piece p1 in S2.Tail)
                     {
-                        foreach (Piece p2 in S2.Tail)
-                        {
-                            if (p1.Pos == p2.Pos&&S!=S2) this.stop = true; ;
-                        }
+                        if (S.Tail[0].Pos == p1.Pos && S != S2) S.otherSnake=true;
                     }
                 }
             }
 
-           
-            
+            if (anzahlSpieler == 2)
+            {
+
+                if (Spieler[0].otherSnake || Spieler[0].wall || Spieler[0].eaten)
+                {
+                    this.stop = true;
+                    MessageBox.Show("Spieler 2 Gewinnt");
+                }
+
+                if (Spieler[1].otherSnake || Spieler[1].wall || Spieler[1].eaten)
+                {
+                    this.stop = true;
+                    MessageBox.Show("Spieler 1 Gewinnt");
+                }
+
+                if((Spieler[1].otherSnake || Spieler[1].wall || Spieler[1].eaten)&& (Spieler[0].otherSnake || Spieler[0].wall || Spieler[0].eaten))
+                {
+                    this.stop = true;
+                    MessageBox.Show("Unentschieden");
+                }
+
+            }
+
+            else
+            {
+                if (Spieler[0].otherSnake || Spieler[0].wall || Spieler[0].eaten)
+                {
+                    this.stop = true;
+                    MessageBox.Show("Punkte:" + Convert.ToString(Spieler[0].Tail.Count-1));
+                }
+            }
+
+
         }
 
         void neuesEssen()

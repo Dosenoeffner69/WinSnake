@@ -23,6 +23,7 @@ namespace WinSnake
             pbCanvas.Height = 302;
             pbCanvas.Width = 302;
             pbCanvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -47,8 +48,6 @@ namespace WinSnake
             if (rbtnEinSpieler.Checked == true) Game = new Game(canvas, Grid,1);
             else Game = new Game(canvas, Grid, 2);
 
-
-            
             Tick.Start();
         }
 
