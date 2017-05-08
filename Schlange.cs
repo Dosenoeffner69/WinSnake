@@ -34,10 +34,10 @@ namespace WinSnake
             Console.WriteLine(Startpunkt);
             switch (Richtung)
             {
-                case 1: SpeedX = 0;SpeedY = -1;break;
-                case 2: SpeedX = 1;SpeedY = 0;break;
-                case 3:SpeedX = 0;SpeedY = 1;break;
-                case 4:SpeedX = -1;SpeedY = 0;break;
+                case 1: SpeedX = 0;SpeedY = -1;break; //unten
+                case 2: SpeedX = 1;SpeedY = 0;break; //rechts
+                case 3:SpeedX = 0;SpeedY = 1;break; //oben
+                case 4:SpeedX = -1;SpeedY = 0;break; //links
             }
         }
 

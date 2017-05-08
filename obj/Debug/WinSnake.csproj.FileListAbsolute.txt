@@ -7,3 +7,12 @@ C:\Users\bleak\Documents\GitHub\WinSnake\obj\Debug\WinSnake.Properties.Resources
 C:\Users\bleak\Documents\GitHub\WinSnake\obj\Debug\WinSnake.csproj.GenerateResource.Cache
 C:\Users\bleak\Documents\GitHub\WinSnake\obj\Debug\WinSnake.exe
 C:\Users\bleak\Documents\GitHub\WinSnake\obj\Debug\WinSnake.pdb
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\bin\Debug\WinSnake.exe.config
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.exe
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.pdb
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\bin\Debug\WinSnake.exe
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\bin\Debug\WinSnake.pdb
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.csprojResolveAssemblyReference.cache
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.frmSnake.resources
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.Properties.Resources.resources
+C:\Users\JannikBruns\Documents\GitHub\WinSnake\obj\Debug\WinSnake.csproj.GenerateResource.Cache

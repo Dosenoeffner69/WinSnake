@@ -15,7 +15,7 @@ namespace WinSnake
         Brush color;
         Graphics canvas;
         
-        public Piece(Brush color,Graphics canvas,int x,int y,int grid)
+        public Piece(Brush color,Graphics canvas,int x,int y,int grid) 
         {
             this.color = color;
             this.canvas = canvas;
